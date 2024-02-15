@@ -1,0 +1,14 @@
+nav .s1{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #282c34;
+}
+nav .s2{
+    display: block;
+    padding: 10px;
+    background-color: #282c34;
+    color: white;
+    text-decoration: none;
+}
