@@ -1,8 +1,13 @@
 import React from 'react'
+// import NavBar from '../../Components/NavBar/NavBar'
+import NavBarOne from '../../Components/NavBarOne/NavBarOne'
 
 function About() {
   return (
-    <div>About</div>
+    <div>
+      <NavBarOne/>
+
+    </div>
   )
 }
 

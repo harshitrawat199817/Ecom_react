@@ -1,29 +1,37 @@
 import axios from 'axios';
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, memo } from 'react'
 import Productcard from '../ProductCard/productcard';
-import { CardGroup, Col, Container, Row } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
+import { useParams } from 'react-router-dom';
 // import { Container } from 'react-bootstrap';
 
-function ProductList({selectedCategory}) {
+function ProductList() {
 
     const [products, setProducts] = useState([]);
-    
+    const { category } = useParams();
 
     useEffect(() => {
-        console.log("selectedCategory:", selectedCategory);
-        axios.get(`https://fakestoreapi.com/products/category/${selectedCategory}`).then((response) => {
-            setProducts(response.data);
-            console.log("API response:", response.data);
-        });
-    }, [selectedCategory]);
+        if (category === undefined) {
+            axios.get(`https://fakestoreapi.com/products`).then((response) => {
+                setProducts(response.data);
+                console.log("API response All:", response.data);
+            })
+        }
+        else {
+            axios.get(`https://fakestoreapi.com/products/category/${category}`).then((response) => {
+                setProducts(response.data);
+                console.log("API response category:", response.data);
+            })
+        }
+    }, [category]);
 
     return (
-        <Row xs="auto"  className="g-4">
+        <Row xs="auto" className="g-4">
             {products.map((product) => {
-                return <Col><Productcard product={product} key={product.id} /></Col>;
+                return <Col key={product.id}><Productcard product={product} /></Col>;
             })}
         </Row>
     );
 }
 
-export default ProductList
+export default memo(ProductList)
