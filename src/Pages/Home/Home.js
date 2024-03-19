@@ -4,7 +4,7 @@ import NavBar from '../../Components/NavBar/NavBar';
 import Slider from '../../Components/Slider/Slider';
 import ProductList from '../../Components/ProductList/ProductList';
 import NavBarOne from '../../Components/NavBarOne/NavBarOne';
-import Login from '../Login/Login';
+// import Login from '../Login/Login';
 // import { Outlet } from 'react-router-dom';
 
 /**
@@ -32,7 +32,7 @@ const Home = () => {
         <Route index element = {<Slider />}/>
         <Route path=":category" element={<ProductList />} />
       </Routes>
-      <Login/>
+      
 
     </div>
   )

@@ -1,12 +1,15 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
+import { useContext } from 'react'
+import { AuthContext } from '../../Context/AuthContext/AuthProvider'
 import { Navbar, Nav,  Dropdown } from 'react-bootstrap';
 import { BsCart } from 'react-icons/bs'
 
 
 
-function NavBarOne({ isLogin }) {
 
+function NavBarOne() {
+    const { isLoggedin, user , logout} = useContext(AuthContext)
     const [cartquantity, setcartquantity] = useState(0);
     
 
@@ -31,23 +34,23 @@ function NavBarOne({ isLogin }) {
                 <Nav.Link to="/cart" className='justify-content-end'><BsCart size={20} />({cartquantity})</Nav.Link>
                 <Dropdown title="Dropdown" id="basic-nav-dropdown" >
                     <Dropdown.Toggle variant="light" id="dropdown-basic">
-                        {isLogin ? 'Logout' : 'Login/Signup'}
+                        {isLoggedin ? 'Welcome ' + user.user : 'Login/Signup'}
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
-                        {!isLogin ?
+                        {!isLoggedin ?
 
                             (
                                 <>
-                                    <Dropdown.Item href="login">Login</Dropdown.Item>
-                                    <Dropdown.Item href="signup">Signup</Dropdown.Item>
+                                    <Dropdown.Item href="/login">Login</Dropdown.Item>
+                                    <Dropdown.Item href="/signup">Signup</Dropdown.Item>
                                 </>
                             )
 
                             :
                             (
                                 <>
-                                    <Dropdown.Item href="profile">Profile</Dropdown.Item>
-                                    <Dropdown.Item href="logout">Logout</Dropdown.Item>
+                                    <Dropdown.Item href="/profile">Profile</Dropdown.Item>
+                                    <Dropdown.Item onClick={logout} >Logout</Dropdown.Item>
                                 </>
                             )
                         }

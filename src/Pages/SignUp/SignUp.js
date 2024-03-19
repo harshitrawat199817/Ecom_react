@@ -213,6 +213,7 @@ const SignUp = () => {
 
                 <input className='btn btn-outline-success mt-3 form-control' type="submit"
                     disabled={!isDirty} />
+                <a href="/login">Already have an account?</a>
             </form>
             <DevTool control={control} />
         </>
